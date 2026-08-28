@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
-import { getUserInfo } from '../api/userApi'
+import { getUserInfo } from '../../api/userApi'
 import styled from 'styled-components'
 
 const Title = styled.div`
   margin: 16px;
-  color: white;
+  color: black;
 `
 
 export const UserInfo = () => {
