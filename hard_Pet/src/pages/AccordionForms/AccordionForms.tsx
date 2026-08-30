@@ -1,19 +1,29 @@
 import { Accordion } from './components/Accordion'
-import Form1 from './forms/Form1/Form1'
-import Form2 from './forms/Form2/Form2'
-import './AccordionForms.css'
+import { FormProvider, useForm } from 'react-hook-form'
+import Form1 from './UI/Form1/Form1'
+import Form2 from './UI/Form2/Form2'
+
 
 export const AccordionForms = () => {
+    const form1Methods = useForm({
+        shouldUnregister: false,
+    })
+    const form2Methods = useForm({
+        shouldUnregister: false,
+    })
     return (
         <div>
-            <h1>Accordion Forms</h1>
-            <Accordion title="Form 1">
-                <Form1 />
-            </Accordion>
+            <FormProvider {...form1Methods}>
+                <Accordion title="Form 1">
+                    <Form1 />
+                </Accordion>
+            </FormProvider>
 
-            <Accordion title="Form 2">
+            <FormProvider {...form2Methods}>
+                <Accordion title="Form 2">
                     <Form2 />
-            </Accordion>
+                </Accordion>
+            </FormProvider>
         </div>
     )
 }
