@@ -1,10 +1,21 @@
-import { useState, type ReactNode } from 'react'
+import { createContext, useState, type ReactNode } from 'react'
 import styled from 'styled-components'
 
 type AccordionProps = {
   title: string
   children: ReactNode
 }
+
+type AccordionContextValue = {
+  isOpen: boolean
+  shouldRender: boolean
+}
+
+export const AccordionContext =
+  createContext<AccordionContextValue>({
+    isOpen: false,
+    shouldRender: false,
+  })
 
 export const Accordion = ({
   title,
@@ -31,28 +42,35 @@ export const Accordion = ({
   }
 
   return (
-    <AccordionWrapper>
-      <AccordionButton
-        type="button"
-        onClick={handleToggle}
-        aria-expanded={isOpen}
-      >
-        {title}
+    <AccordionContext.Provider
+      value={{
+        isOpen,
+        shouldRender,
+      }}
+    >
+      <AccordionWrapper>
+        <AccordionButton
+          type="button"
+          onClick={handleToggle}
+          aria-expanded={isOpen}
+        >
+          {title}
 
-        <Arrow $isOpen={isOpen}>
-          ▼
-        </Arrow>
-      </AccordionButton>
+          <Arrow $isOpen={isOpen}>
+            ▼
+          </Arrow>
+        </AccordionButton>
 
-      <AccordionContent
-        $isOpen={isOpen}
-        onTransitionEnd={handleTransitionEnd}
-      >
-        <AccordionContentInner>
-          {shouldRender && children}
-        </AccordionContentInner>
-      </AccordionContent>
-    </AccordionWrapper>
+        <AccordionContent
+          $isOpen={isOpen}
+          onTransitionEnd={handleTransitionEnd}
+        >
+          <AccordionContentInner>
+            {children}
+          </AccordionContentInner>
+        </AccordionContent>
+      </AccordionWrapper>
+    </AccordionContext.Provider>
   )
 }
 

@@ -1,20 +1,30 @@
-import { useFormContext } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import { useContext} from 'react'
 import styled from 'styled-components'
 
 import { Input } from '../../components/Input'
 import { Select } from '../../components/Select'
 import { Checkbox } from '../../components/Checkbox'
+import { AccordionContext } from '../../components/Accordion'
 
 const Form1 = () => {
   const {
     register,
     handleSubmit,
-  } = useFormContext()
+  } = useForm({
+    shouldUnregister: false,
+  })
+
+  const context = useContext(AccordionContext)
 
   const onSubmit = (data: unknown) => {
     console.log('Form1:', data)
   }
 
+  if (!context.shouldRender) {
+    return null
+  }
+  
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <Input
