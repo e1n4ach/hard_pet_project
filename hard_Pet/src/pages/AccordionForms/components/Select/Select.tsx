@@ -3,6 +3,7 @@ import type {
   SelectHTMLAttributes,
 } from 'react'
 import styled from 'styled-components'
+import { SkeletonWrapper } from '../SkeletonWrapper'
 
 type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   label?: string
@@ -15,13 +16,15 @@ export const Select = ({
   ...props
 }: SelectProps) => {
   return (
-    <SelectLabel>
-      {label}
+    <SkeletonWrapper>
+      <SelectLabel>
+        {label}
 
-      <StyledSelect {...props}>
-        {children}
-      </StyledSelect>
-    </SelectLabel>
+        <StyledSelect {...props}>
+          {children}
+        </StyledSelect>
+      </SelectLabel>
+    </SkeletonWrapper> 
   )
 }
 

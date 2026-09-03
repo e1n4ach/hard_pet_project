@@ -1,5 +1,6 @@
 import type { InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
+import { SkeletonWrapper } from '../SkeletonWrapper'
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string
@@ -7,10 +8,12 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 
 export const Input = ({ label, ...props }: InputProps) => {
   return (
-    <InputLabel>
-      {label}
-      <StyledInput {...props} />
-    </InputLabel>
+    <SkeletonWrapper>
+      <InputLabel>
+        {label}
+        <StyledInput {...props} />
+      </InputLabel>
+    </SkeletonWrapper>
   )
 }
 

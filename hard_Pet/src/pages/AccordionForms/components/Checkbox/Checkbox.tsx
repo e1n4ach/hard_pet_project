@@ -1,5 +1,6 @@
 import type { InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
+import { SkeletonWrapper } from '../SkeletonWrapper'
 
 type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string
@@ -10,14 +11,16 @@ export const Checkbox = ({
   ...props
 }: CheckboxProps) => {
   return (
-    <CheckboxLabel>
-      <StyledCheckbox
-        type="checkbox"
-        {...props}
-      />
+    <SkeletonWrapper>
+      <CheckboxLabel>
+        <StyledCheckbox
+          type="checkbox"
+          {...props}
+        />
 
-      {label}
-    </CheckboxLabel>
+        {label}
+      </CheckboxLabel>
+    </SkeletonWrapper>
   )
 }
 
